@@ -1,0 +1,63 @@
+﻿
+<EditForm Model="@game" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Game Name: </label>
+            <div>
+                <InputText @bind-Value="@game.Name" class="form-control" />
+                <ValidationMessage For="@(() => game.Name)" />
+            </div>
+        </div>
+    </fieldset>
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Platform: </label>
+            <div>
+                <InputSelect @bind-Value="@game.Platform" class="form-control">
+                    <option value="Playstation5">Playstation 5</option>
+                    <option value="Playstation4">Playstation 4</option>
+                    <option value="XboxSeriesX">Xbox Series X</option>
+                    <option value="NintendoSwitch">Nintendo Switch</option>
+                    <option value="NintendoSwitchOLED">Nintendo Switch OLED</option>
+                    <option value="SteamDeckOLED">Steam Deck OLED</option>
+                    <option value="NintendoSwitchLite">Nintendo Switch Lite</option>
+                </InputSelect>
+                <ValidationMessage For="@(() => game.Platform)" />
+            </div>
+        </div>
+    </fieldset>
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Release Date: </label>
+            <div>
+                <InputDate @bind-Value="@game.ReleaseDate" class="form-control" />
+                <ValidationMessage For="@(() => game.ReleaseDate)" />
+            </div>
+        </div>
+    </fieldset>
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Price: </label>
+            <div>
+                <InputNumber @bind-Value="@game.Price" class="form-control" step="0.01" />
+                <ValidationMessage For="@(() => game.Price)" />
+            </div>
+        </div>
+    </fieldset>
+
+
+    <button type="submit" class="btn btn-success btn-block">
+        @ButtonText
+    </button>
+    <BackToList Target="games" />
+</EditForm>
+
+@code {
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public Game? game { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

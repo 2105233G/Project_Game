@@ -1,0 +1,14 @@
+﻿@page "/games/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+<h3>View Game</h3>
+<FormComponent game="game" Disabled="true" />
+@code {
+    [Parameter] public int id { get; set; }
+    Game? game = new Game();
+    protected async override Task OnParametersSetAsync()
+    {
+        game = await
+        _client.GetFromJsonAsync<Game>($"{Endpoints.GamesEndpoint}/{id}");
+    }
+}

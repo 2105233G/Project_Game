@@ -4,16 +4,19 @@ using GameStoreManagement.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace GameStoreManagement.Server.Data.Migrations
+namespace GameStoreManagement.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240206084931_ProjectCompletion")]
+    partial class ProjectCompletion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,15 +255,19 @@ namespace GameStoreManagement.Server.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Platform")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
                     b.Property<DateTime?>("ReleaseDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Updatedby")
@@ -275,8 +282,8 @@ namespace GameStoreManagement.Server.Data.Migrations
                         {
                             Id = 1,
                             Createdby = "System",
-                            DateCreated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(714),
-                            DateUpdated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(723),
+                            DateCreated = new DateTime(2024, 2, 6, 16, 49, 31, 449, DateTimeKind.Local).AddTicks(5610),
+                            DateUpdated = new DateTime(2024, 2, 6, 16, 49, 31, 449, DateTimeKind.Local).AddTicks(5622),
                             Name = "Call of Duty",
                             Platform = "Play Station",
                             Price = 49.899999999999999,
@@ -287,8 +294,8 @@ namespace GameStoreManagement.Server.Data.Migrations
                         {
                             Id = 2,
                             Createdby = "System",
-                            DateCreated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(726),
-                            DateUpdated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(726),
+                            DateCreated = new DateTime(2024, 2, 6, 16, 49, 31, 449, DateTimeKind.Local).AddTicks(5626),
+                            DateUpdated = new DateTime(2024, 2, 6, 16, 49, 31, 449, DateTimeKind.Local).AddTicks(5627),
                             Name = "Need for Speed",
                             Platform = "X-box",
                             Price = 39.899999999999999,
@@ -342,12 +349,14 @@ namespace GameStoreManagement.Server.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Createdby")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DOB")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateCreated")
@@ -357,13 +366,17 @@ namespace GameStoreManagement.Server.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NRIC")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Updatedby")
                         .HasColumnType("nvarchar(max)");
@@ -380,8 +393,8 @@ namespace GameStoreManagement.Server.Data.Migrations
                             ContactNumber = "96750134",
                             Createdby = "System",
                             DOB = new DateTime(2002, 7, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateCreated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(977),
-                            DateUpdated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(978),
+                            DateCreated = new DateTime(2024, 2, 6, 16, 49, 31, 449, DateTimeKind.Local).AddTicks(5960),
+                            DateUpdated = new DateTime(2024, 2, 6, 16, 49, 31, 449, DateTimeKind.Local).AddTicks(5960),
                             Email = "emily@gmail.com",
                             NRIC = "K2456345T",
                             Name = "Edward Williams",
@@ -394,8 +407,8 @@ namespace GameStoreManagement.Server.Data.Migrations
                             ContactNumber = "80850134",
                             Createdby = "System",
                             DOB = new DateTime(1981, 6, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateCreated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(980),
-                            DateUpdated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(980),
+                            DateCreated = new DateTime(2024, 2, 6, 16, 49, 31, 449, DateTimeKind.Local).AddTicks(5963),
+                            DateUpdated = new DateTime(2024, 2, 6, 16, 49, 31, 449, DateTimeKind.Local).AddTicks(5964),
                             Email = "jamie.dornan@gmail.com",
                             NRIC = "T7458445J",
                             Name = "Dave Jonas",

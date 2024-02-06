@@ -1,0 +1,23 @@
+﻿@page "/staffs/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create Staff</h3>
+<hr />
+<br />
+<FormComponent ButtonText="Create Staff" staff="staff"
+               OnValidSubmit="@CreateStaff" />
+
+@code {
+    private GameStoreManagement.Shared.Domain.Staff? staff = new GameStoreManagement.Shared.Domain.Staff();
+
+    private async Task CreateStaff()
+    {
+        if (staff != null)
+        {
+            await _client.PostAsJsonAsync(Endpoints.StaffsEndpoint, staff);
+            _navManager.NavigateTo("/staffs/");
+        }
+        // You may want to handle the case where 'staff' is null, depending on your requirements.
+    }
+}

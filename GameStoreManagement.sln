@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStoreManagement.Server", "GameStoreManagement\Server\GameStoreManagement.Server.csproj", "{4D4DF2FC-B820-4321-8F0B-7CC1ED9719B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameStoreManagement.Server", "GameStoreManagement\Server\GameStoreManagement.Server.csproj", "{4D4DF2FC-B820-4321-8F0B-7CC1ED9719B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStoreManagement.Client", "GameStoreManagement\Client\GameStoreManagement.Client.csproj", "{7CFA9441-3B0A-4AC6-8AF8-E5360BC58BBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameStoreManagement.Client", "GameStoreManagement\Client\GameStoreManagement.Client.csproj", "{7CFA9441-3B0A-4AC6-8AF8-E5360BC58BBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStoreManagement.Shared", "GameStoreManagement\Shared\GameStoreManagement.Shared.csproj", "{8F7A8D47-C911-447D-89D8-B992AF751DA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameStoreManagement.Shared", "GameStoreManagement\Shared\GameStoreManagement.Shared.csproj", "{8F7A8D47-C911-447D-89D8-B992AF751DA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

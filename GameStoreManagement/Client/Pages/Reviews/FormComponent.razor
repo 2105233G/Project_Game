@@ -1,0 +1,54 @@
+﻿@inject HttpClient _client
+<EditForm Model="@review" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <fieldset disabled="@Disabled">
+     <div class="form-group">
+         <label>Game: </label>
+         <div>
+             <InputSelect @bind-Value="review.GameId" class="form-control">
+                 <option value=""> -- Select Game --</option>
+                 @if (Games != null)
+                 {
+                     foreach (var game in Games)
+                     {
+                         <option value="@game.Id">@game.Name</option>
+                     }
+                 }
+             </InputSelect>
+             <ValidationMessage For="@(() => review.GameId)" />
+         </div>
+     </div>
+ </fieldset>
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Rating: </label>
+            <div>
+                <InputNumber @bind-Value="@review.rating" class="form-control" step="0.1" />
+                <ValidationMessage For="@(() => review.rating)" />
+            </div>
+        </div>
+    </fieldset>
+    <button type="submit" class="btn btn-success btn-block">
+        @ButtonText
+    </button>
+    <BackToList Target="reviews" />
+</EditForm>
+
+@code {
+
+    
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public Review? review { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private IList<Game>? Games;
+
+    protected override async Task OnInitializedAsync()
+{
+    Games = await _client.GetFromJsonAsync<List<Game>>(Endpoints.GamesEndpoint);
+    
+}
+}

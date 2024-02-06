@@ -1,0 +1,91 @@
+﻿@page "/games/"
+@*@inject HttpInterceptorService _interceptor
+@implements IDisposable*@
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3 class="card-title">GameStore Games</h3>
+
+<a href="/games/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Game
+</a>
+<br />
+<br />
+
+@if (Games == null)
+{
+    <div class="alert alert-info">Loading Games...</div>
+}
+else
+{
+    <table class="table table-responsive" id="gamesTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Platform</th>
+                <th>Released Date</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in Games)
+            {
+                <tr>
+                    <td>@game.Name</td>
+                    <td>@game.Platform</td>
+                    <td>@(game.ReleaseDate.HasValue ? game.ReleaseDate.Value.ToShortDateString() : "")</td>
+                    <td>@game.Price</td>
+                    <td>
+                        <a href="/games/view/@game.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/games/edit/@game.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(async () => await Delete(game.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Game>? Games;
+
+    protected override async Task OnInitializedAsync()
+    {
+        @*_interceptor.MonitorEvent();*@
+        Games = await _client.GetFromJsonAsync<List<Game>>(Endpoints.GamesEndpoint);
+    }
+
+    @*protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#gamesTable");
+    }
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#gamesTable");
+        _interceptor.DisposeEvent();
+    }*@
+
+    async Task Delete(int gameId)
+    {
+        if (Games != null)
+        {
+            var game = Games.First(q => q.Id == gameId);
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {game.Name}?");
+            if (confirm)
+            {
+                await _client.DeleteAsync($"{Endpoints.GamesEndpoint}/{gameId}");
+                await OnInitializedAsync();
+            }
+        }
+    }
+}

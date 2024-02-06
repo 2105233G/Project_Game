@@ -1,0 +1,23 @@
+﻿@page "/games/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create Game</h3>
+<hr />
+<br />
+<FormComponent ButtonText="Create Game" game="game"
+               OnValidSubmit="@CreateGame" />
+
+@code {
+    private GameStoreManagement.Shared.Domain.Game? game = new GameStoreManagement.Shared.Domain.Game();
+
+    private async Task CreateGame()
+    {
+        if (game != null)
+        {
+            await _client.PostAsJsonAsync(Endpoints.GamesEndpoint, game);
+            _navManager.NavigateTo("/games/");
+        }
+        // You may want to handle the case where 'game' is null, depending on your requirements.
+    }
+}
